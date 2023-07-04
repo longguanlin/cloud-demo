@@ -1,0 +1,5 @@
+com\lgl\user\pojo\User.class
+com\lgl\user\controller\UserController.class
+com\lgl\user\service\UserService.class
+com\lgl\user\UserApplication.class
+com\lgl\user\mapper\UserMapper.class

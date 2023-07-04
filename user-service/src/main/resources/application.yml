@@ -1,0 +1,39 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: jdbc:mysql://121.36.198.131:3306/cloud-user?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: P@ssw0rd
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: userservice
+  cloud:
+    nacos:
+      server-addr: http://121.36.198.131:8848
+      discovery:
+        cluster-name: HZ # 集群名称
+        namespace: dfe8cbde-0ec5-43b6-861f-aa8afaee1269 # 命名空间，填ID
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
+mybatis:
+  type-aliases-package: com.lgl.user.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.lgl: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+#  logging.config：日志配置文件的位置。例如：classpath:logback.xml。
+#  logging.exception-conversion-word：当日志出现异常时会用到这个转换词。
+#  logging.file：配置日志输出的文件名，也可以配置文件名的绝对路径。
+#  logging.level：设置日志等级。
+#  logging.file.max-size：配置日志文件的最大值，默认10MB。
+#  logging.path：配置日志的路径。如果没有配置logging.file,Spring Boot 将默认使用spring.log作为文件名。例如/var/log。
+#  logging.pattern.console：用在控制台中的日志模式(stdout)。(只支持默认的Logback设置。)
+#  logging.pattern.dateformat：设置日志日期格式。
+#  logging.pattern.file：用在文件中的日志模式 (如果启用LOG_FILE)。(只支持默认的Logback设置。)
+#  logging.pattern.level：定义渲染不同级别日志的格式。默认是%5p。
