@@ -1,5 +1,6 @@
 package com.lgl.order.pojo;
 
+import com.lgl.feign.pojo.User;
 import lombok.Data;
 
 @Data
@@ -9,5 +10,5 @@ public class Order {
     private String name;
     private Integer num;
     private Long userId;
-    private com.lgl.order.pojo.User user;
+    private User user;
 }

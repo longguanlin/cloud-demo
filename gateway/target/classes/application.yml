@@ -1,0 +1,49 @@
+server:
+  port: 10010 # 网关端口
+spring:
+  application:
+    name: gateway # 服务名称
+  cloud:
+    nacos:
+      server-addr: http://121.36.198.131:8848 # nacos地址
+      discovery:
+        cluster-name: HZ # 集群名称
+        namespace: dfe8cbde-0ec5-43b6-861f-aa8afaee1269 # 命名空间，填ID
+    gateway:
+      routes: # 网关路由配置
+        - id: user-service # 路由id，自定义，只要唯一即可
+          # uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址
+          uri: lb://userservice # 路由的目标地址 lb是负载均衡，根据服务名拉取服务列表，实现负载均衡。
+          predicates: # 路由断言，也就是判断请求是否符合路由规则的条件
+            - Path=/user/** # 这个是按照路径匹配，只要以/user/开头就符合要求
+            - After=2023-01-20T17:42:47.789-07:00[America/Denver]
+          filters: # 路由过滤器
+            - AddRequestHeader=Hello, Welecome!!! # 添加请求头
+
+        - id: order-service # 路由id，自定义，只要唯一即可
+          # uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址
+          uri: lb://orderservice # 路由的目标地址 lb是负载均衡，根据服务名拉取服务列表，实现负载均衡。
+          predicates: # 路由断言，也就是判断请求是否符合路由规则的条件
+            - Path=/order/** # 这个是按照路径匹配，只要以/user/开头就符合要求
+      default-filters: # 默认过滤项 对所有路由都生效 提供了31中过滤器
+        - AddRequestHeader=Hello, Itcast is freaking awesome!
+      # 路由过滤器和默认过滤器都是GatewayFilter对象，通过配置文件实现，全局过滤器是通过实现GlobalFilter接口实现
+      # order值越小，优先级越高，执行顺序越靠前。当过滤器的order值一样时，会按照 defaultFilter > 路由过滤器 > GlobalFilter的顺序执行。
+
+      # 配置CORS跨域请求
+      globalcors: # 全局的跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:8090"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 360000 # 这次跨域检测的有效期
+

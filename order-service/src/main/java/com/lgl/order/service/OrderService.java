@@ -1,9 +1,9 @@
 package com.lgl.order.service;
 
-import com.lgl.order.client.UserClient;
+import com.lgl.feign.client.UserClient;
+import com.lgl.feign.pojo.User;
 import com.lgl.order.mapper.OrderMapper;
 import com.lgl.order.pojo.Order;
-import com.lgl.order.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

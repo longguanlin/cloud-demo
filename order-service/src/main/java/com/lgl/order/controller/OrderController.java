@@ -1,7 +1,6 @@
 package com.lgl.order.controller;
 
 import com.lgl.order.pojo.Order;
-import com.lgl.order.pojo.User;
 import com.lgl.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
